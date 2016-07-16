@@ -1,0 +1,50 @@
+﻿@model MyTaskTracker.Task
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Task</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskComplete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskComplete)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TaskID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

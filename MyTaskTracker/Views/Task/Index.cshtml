@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MyTaskTracker.Task>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@*@using (Html.BeginForm())
+{
+    <p>
+        Select Task by Status: @Html.DropDownList("SelectTaskStatus", "All")
+        <input type="submit" value="Filter" />
+    </p>
+}*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskComplete)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskComplete)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TaskID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TaskID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TaskID })
+        </td>
+    </tr>
+}
+
+</table>
