@@ -131,55 +131,44 @@ namespace MyTaskTracker.Controllers
 
         public ActionResult DueToday()
         {
-            //    var tasks = (from t in db.Tasks
-            //                 where (t.DueDate = Convert.ToDateTime
-            return View(db.Tasks.ToList());
+            var tasks = (from t in db.Tasks
+                         where t.DueDate.Year == DateTime.Now.Year
+                         && t.DueDate.Month == DateTime.Now.Month
+                         && t.DueDate.Day == DateTime.Now.Day
+                         select t).ToList();
+            return View(tasks);
         }
-
 
         public ActionResult DueSoon()
         {
-            return View();
-
-            //IQueryable<Task> tasks = db.Tasks;
-
-
-            //return View();
+            var tasks = (from t in db.Tasks
+                         where DbFunctions.TruncateTime(t.DueDate) > DbFunctions.TruncateTime(DateTime.Now)
+                         select t).ToList();
+            return View(tasks);
         }
 
         public ActionResult PastDue()
         {
-           
-
-            //IQueryable<Task> tasks = db.Tasks;
-
-
-            return View();
+            var tasks = (from t in db.Tasks
+                         where DbFunctions.TruncateTime(t.DueDate) > DbFunctions.TruncateTime(DateTime.Now)
+                         select t).ToList();
+            return View(tasks);
         }
 
         public ActionResult Complete()
         {
             var tasks = (from t in db.Tasks
-                         where t.TaskName == "Fix Saab Window"
-                         select t.TaskName);
-                         return View(db.Tasks.ToList());
-
-
-
-            //IQueryable<Task> tasks = db.Tasks;
-
-
-            //return View();
+                         where t.TaskComplete == true
+                         select t).ToList();
+            return View(tasks);
         }
 
         public ActionResult NotComplete()
         {
-            return View(db.Tasks.ToList());
-
-            //IQueryable<Task> tasks = db.Tasks;
-
-
-            //return View();
+            var tasks = (from t in db.Tasks
+                         where t.TaskComplete == false
+                         select t).ToList();
+            return View(tasks);
         }
 
         protected override void Dispose(bool disposing)
